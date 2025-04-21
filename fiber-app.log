@@ -1,0 +1,8 @@
+time="2025-04-21T22:41:25+05:30" level=info msg="🔧 Starting application..."
+time="2025-04-21T22:41:25+05:30" level=info msg="🚀 Server is running at http://localhost:3000"
+time="2025-04-21T22:41:56+05:30" level=info msg="📥 Creating a new user..."
+time="2025-04-21T22:41:56+05:30" level=info msg="📥 Parsed user input: Name=Saurabh, Email=saurabh@example.com, Password=Password123"
+time="2025-04-21T22:41:57+05:30" level=info msg="🔐 Final hashed password to store: $2a$10$cPtLUlBwU7DFLHYfKGmQ7OyRUwzXnNnyPE/hNJqYlJAZO8XhzjXsq"
+time="2025-04-21T22:41:57+05:30" level=info msg="🕒 Timestamps set: CreatedAt=2025-04-21T22:41:57+05:30, UpdatedAt=2025-04-21T22:41:57+05:30"
+time="2025-04-21T22:41:57+05:30" level=info msg="📤 Inserting user into the database..."
+time="2025-04-21T22:41:57+05:30" level=info msg="✅ User inserted with ID: 15"

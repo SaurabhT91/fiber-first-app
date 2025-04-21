@@ -1,7 +1,9 @@
 package main
 
 import (
+	"io"
 	"log"
+	"os"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/sirupsen/logrus"
@@ -9,8 +11,9 @@ import (
 	"fiber-first-app/db"
 	"fiber-first-app/routes"
 
-	_ "fiber-first-app/docs" // Needed if you are using Swagger
-	"github.com/swaggo/fiber-swagger" // fiber-swagger middleware
+	_ "fiber-first-app/docs" // Swagger docs
+
+	fiberSwagger "github.com/swaggo/fiber-swagger" // Swagger middleware
 )
 
 // @title Fiber CRUD API
@@ -19,28 +22,36 @@ import (
 // @host localhost:3000
 // @BasePath /api
 func main() {
-	// Initialize logger
+	// 🔧 Setup logging to both a file and stdout
+	logFile, err := os.OpenFile("fiber-app.log", os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
+	if err != nil {
+		log.Fatalf("❌ Failed to open log file: %v", err)
+	}
+
+	logrus.SetOutput(io.MultiWriter(os.Stdout, logFile))
 	logrus.SetFormatter(&logrus.TextFormatter{
 		FullTimestamp: true,
 	})
+	logrus.SetLevel(logrus.InfoLevel)
+
 	logrus.Info("🔧 Starting application...")
 
-	// Initialize database connection
+	// Initialize DB
 	db.InitDB()
 
-	// Create a new Fiber app
+	// Create Fiber app
 	app := fiber.New()
 
-	// Optional: Swagger docs endpoint
+	// Swagger endpoint
 	app.Get("/swagger/*", fiberSwagger.WrapHandler)
 
 	// Register routes
 	routes.SetupRoutes(app)
 
-	// Start the server
+	// Start server
 	port := ":3000"
-	logrus.Infof("🚀 Server is running on http://localhost%s", port)
+	logrus.Infof("🚀 Server is running at http://localhost%s", port)
 	if err := app.Listen(port); err != nil {
-		log.Fatalf("❌ Failed to start server: %v", err)
+		logrus.Fatalf("❌ Failed to start server: %v", err)
 	}
 }
