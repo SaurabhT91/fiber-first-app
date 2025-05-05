@@ -95,10 +95,15 @@ func UpdateEvent(c *fiber.Ctx) error {
 // DeleteEvent deletes an event
 func DeleteEvent(c *fiber.Ctx) error {
 	id := c.Params("id")
-	_, err := db.Conn.Exec(c.Context(), "DELETE FROM events WHERE id=$1", id)
+	result, err := db.Conn.Exec(c.Context(), "DELETE FROM events WHERE id=$1", id)
 	if err != nil {
 		logrus.Error("Failed to delete event: ", err)
 		return c.Status(500).JSON(fiber.Map{"error": err.Error()})
 	}
-	return c.SendStatus(204)
+
+	if result.RowsAffected() == 0 {
+		return c.Status(404).JSON(fiber.Map{"error": "Event not found"})
+	}
+
+	return c.Status(200).JSON(fiber.Map{"message": "Event deleted successfully"})
 }

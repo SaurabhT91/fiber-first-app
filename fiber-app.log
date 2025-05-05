@@ -66,3 +66,7 @@ time="2025-04-29T20:52:17+05:30" level=info msg="🚀 Server is running at http:
 time="2025-05-04T18:20:40+05:30" level=info msg="🔧 Starting application..."
 time="2025-05-04T18:33:59+05:30" level=info msg="🔧 Starting application..."
 time="2025-05-04T18:33:59+05:30" level=info msg="🚀 Server is running at http://localhost:3000"
+time="2025-05-05T22:00:14+05:30" level=info msg="🔧 Starting application..."
+time="2025-05-05T22:00:14+05:30" level=info msg="🚀 Server is running at http://localhost:3000"
+time="2025-05-05T22:21:11+05:30" level=info msg="🔧 Starting application..."
+time="2025-05-05T22:21:12+05:30" level=info msg="🚀 Server is running at http://localhost:3000"
